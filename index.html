@@ -49,7 +49,13 @@ button.primary,.active{background:#d91d38!important;border-color:#ff7a83!importa
 .dash-player-list{display:flex;flex-wrap:wrap;gap:7px;padding:13px}.dash-done{color:#8be0a5;font-size:13px}
 .metric .progress{margin-top:10px}
 @media(max-width:600px){.dash-two-col{grid-template-columns:1fr}.dash-bg-card{padding:12px}}
-</style></head><body><header class="jugger-header"><div class="jugger-banner-wrap"><img class="jugger-banner" src="juggerbot-banner.jpg" alt="JUGGERBOT AQ PLANNER — red-armoured comic mascot smashing through rubble" loading="eager" decoding="async"></div><div class="jugger-tagline">💥 MAP 8 SMASH ZONE <span>·</span> NO ONE STOPS THE JUGGERNAUT!</div></header><nav class="site-nav" aria-label="Main navigation"><button type="button" data-view="home" class="active">🏠 Home</button><button type="button" data-view="dashboard">📊 Dashboard</button><button type="button" data-view="aq">💥 AQ Map 8</button><button type="button" data-view="raid">🛡️ RAID</button></nav><main><div class="view" id="view-home"><section class="hero-card"><div class="muted">JUGGERBOT HQ · ALLIANCE OPERATIONS</div><h2>CHOOSE YOUR BATTLE!</h2><p>Plan the lanes. Rally the squad. Smash the objectives.</p></section><div class="hub-grid"><button type="button" class="hub-tile" data-go="dashboard"><span class="tile-icon">📊</span><span><strong>DASHBOARD</strong><small>Live alliance overview</small></span></button><button type="button" class="hub-tile" data-go="aq"><span class="tile-icon">💥</span><span><strong>AQ MAP 8</strong><small>All 3 Battlegroups</small></span></button><button type="button" class="hub-tile" data-go="raid"><span class="tile-icon">🛡️</span><span><strong>RAID</strong><small>9 roles per BG · live assignments</small></span></button><div class="hub-tile soon" aria-label="Coming soon"><span class="tile-icon">🔒</span><span><strong>COMING SOON</strong><small>More ways to smash</small></span></div></div></div>
+
+/* Stage 5: champion library */
+.champ-controls{display:grid;grid-template-columns:1fr auto;gap:10px}.champ-controls select{background:#120d13;color:#fff4df;border:2px solid #813040;border-radius:5px;padding:9px;font:inherit;max-width:100%}
+.champ-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.champ-card{text-align:left;padding:15px;min-height:130px;background:linear-gradient(135deg,#391826,#1b1119);border:2px solid #913b53;display:flex;flex-direction:column;justify-content:space-between;gap:12px}.champ-card strong{font-size:17px;overflow-wrap:anywhere}.champ-class{font-size:12px;color:#ffc3cf}.champ-class[data-class="Mystic"]{color:#d6b4ff}.champ-class[data-class="Cosmic"]{color:#ffe09c}.champ-class[data-class="Tech"]{color:#a9e6ff}.champ-class[data-class="Mutant"]{color:#fbb6ff}.champ-class[data-class="Science"]{color:#a4f3ad}.champ-class[data-class="Skill"]{color:#ffb8a2}
+.champ-profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.champ-field{background:#1e1119;border:1px solid #783248;padding:13px;border-radius:6px}.champ-field h3{margin:0 0 8px;font-size:14px;text-transform:uppercase}.champ-field p,.champ-field ul{margin:0;line-height:1.6;overflow-wrap:anywhere}.champ-field ul{padding-left:19px}.champ-link{color:#ffb1bf;overflow-wrap:anywhere}.champ-muted{color:#d3b9bf}.champ-back{margin-bottom:12px}.champ-portrait{width:130px;max-width:100%;border-radius:8px;border:2px solid #813040;object-fit:cover}.champ-heading{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+@media(max-width:560px){.champ-controls{grid-template-columns:1fr}.champ-profile-grid{grid-template-columns:1fr}.champ-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head><body><header class="jugger-header"><div class="jugger-banner-wrap"><img class="jugger-banner" src="juggerbot-banner.jpg" alt="JUGGERBOT AQ PLANNER — red-armoured comic mascot smashing through rubble" loading="eager" decoding="async"></div><div class="jugger-tagline">💥 MAP 8 SMASH ZONE <span>·</span> NO ONE STOPS THE JUGGERNAUT!</div></header><nav class="site-nav" aria-label="Main navigation"><button type="button" data-view="home" class="active">🏠 Home</button><button type="button" data-view="dashboard">📊 Dashboard</button><button type="button" data-view="aq">💥 AQ Map 8</button><button type="button" data-view="raid">🛡️ RAID</button><button type="button" data-view="champions">📚 Champions</button></nav><main><div class="view" id="view-home"><section class="hero-card"><div class="muted">JUGGERBOT HQ · ALLIANCE OPERATIONS</div><h2>CHOOSE YOUR BATTLE!</h2><p>Plan the lanes. Rally the squad. Smash the objectives.</p></section><div class="hub-grid"><button type="button" class="hub-tile" data-go="dashboard"><span class="tile-icon">📊</span><span><strong>DASHBOARD</strong><small>Live alliance overview</small></span></button><button type="button" class="hub-tile" data-go="aq"><span class="tile-icon">💥</span><span><strong>AQ MAP 8</strong><small>All 3 Battlegroups</small></span></button><button type="button" class="hub-tile" data-go="raid"><span class="tile-icon">🛡️</span><span><strong>RAID</strong><small>9 roles per BG · live assignments</small></span></button><button type="button" class="hub-tile" data-go="champions"><span class="tile-icon">📚</span><span><strong>CHAMPION LIBRARY</strong><small>Search champions · abilities · guides</small></span></button></div></div>
 <div class="view" id="view-dashboard" hidden>
 <section class="hero-card"><div class="muted">JUGGERBOT 2.0 · LIVE ALLIANCE INTELLIGENCE</div><h2>ALLIANCE COMMAND CENTRE</h2><p>Every battlegroup. Every open slot. No excuses.</p></section>
 <section class="card"><div class="row between"><h2>📊 Alliance Overview</h2><button type="button" class="primary" id="dash-refresh">↻ Refresh</button></div>
@@ -60,6 +66,14 @@ button.primary,.active{background:#d91d38!important;border-color:#ff7a83!importa
 <section class="card"><h2>👥 Player Allocation</h2><p class="muted">A player can fill several slots, but only in one battlegroup across AQ and RAID.</p><div id="dash-roster">Loading…</div></section>
 <div class="dash-actions"><button type="button" class="primary" data-go="aq">Open AQ planner</button><button type="button" data-go="raid">Open RAID planner</button></div></div>
 <div class="view" id="view-raid" hidden><section class="hero-card"><div class="muted">RAID ASSIGNMENT PLANNER · LIVE</div><h2>SMASH THE RAID!</h2><p>Three branches. Three roles per branch. Nine assignments per Battlegroup.</p></section><section class="card"><h2>🛡️ RAID Battlegroup</h2><div class="tabs" id="raid-tabs"><button type="button" class="active" data-raid-bg="1">BG1</button><button type="button" data-raid-bg="2">BG2</button><button type="button" data-raid-bg="3">BG3</button></div><p class="muted">Choose a player for each role. AQ and RAID share one Battlegroup lock. Changes save immediately to the shared database.</p><div class="raid-grid" id="raid-grid"></div><div class="row" style="margin-top:16px"><button class="primary" id="raid-copy">Copy RAID Battle Orders</button><button id="raid-refresh">Refresh RAID</button></div><p id="raid-status" class="muted" role="status" aria-live="polite"></p><textarea id="raid-fallback" hidden></textarea></section></div>
+<div class="view" id="view-champions" hidden>
+<section class="hero-card"><div class="muted">JUGGERBOT 3.0 · CHAMPION INTELLIGENCE</div><h2>CHAMPION LIBRARY</h2><p>Find your next powerhouse. Research abilities. Learn the rotations. Smash the competition.</p></section>
+<section class="card" id="champ-directory"><div class="row between"><h2>📚 Champion Directory</h2><button type="button" id="champ-refresh">↻ Refresh</button></div>
+<div class="champ-controls"><input id="champ-search" type="search" placeholder="Search champion names…" aria-label="Search champions" maxlength="80"><select id="champ-filter" aria-label="Filter champion class"><option value="">All six classes</option><option>Cosmic</option><option>Tech</option><option>Mutant</option><option>Skill</option><option>Science</option><option>Mystic</option></select></div>
+<p class="muted" id="champ-status" role="status" aria-live="polite">Loading champion directory…</p><div id="champ-grid" class="champ-grid"></div>
+<p class="muted">Profiles are populated from verified database records. Missing details are shown as pending, not guessed.</p></section>
+<section class="card" id="champ-profile" hidden><button type="button" class="champ-back" id="champ-back">← Back to directory</button><div id="champ-profile-content"></div></section>
+</div>
 <div class="view" id="view-aq" hidden>
 <section class="card"><div class="row between"><h2>💥 Pick Your Battlegroup</h2><span class="badge" id="bglabel">BG1</span></div><div class="tabs" id="bgtabs"><button class="active" data-bg="1">BG1</button><button data-bg="2">BG2</button><button data-bg="3">BG3</button></div><p class="muted">Players can be assigned to only one Battlegroup across AQ and RAID. Remove their existing assignments before moving them.</p></section>
 <section class="card"><div class="row between"><h2>👊 The Smash Squad</h2><span class="badge" id="pc">0 players</span></div><div class="row"><input id="newp" placeholder="Enter in-game name" maxlength="35"><button class="primary" id="add">+ Recruit</button></div><div class="roster" id="roster"></div><p class="muted">Drag a player onto a path, or tap a player and then tap a path. Use the ✕ next to a player to delete them and all their AQ and RAID assignments. This board is public to anyone with the link.</p></section>
@@ -99,7 +113,7 @@ if(SUPABASE_URL.startsWith("https://")&&(SUPABASE_ANON_KEY.startsWith("ey")||SUP
 
 /* 2.0 view controller. Existing AQ logic is retained unchanged. */
 let activeView="home",raidBg=1;
-function showView(view){if(!["home","dashboard","aq","raid"].includes(view))view="home";activeView=view;document.querySelectorAll(".view").forEach(el=>el.hidden=el.id!=="view-"+view);document.querySelectorAll("[data-view]").forEach(el=>el.classList.toggle("active",el.dataset.view===view));if(view==="dashboard")loadDashboard();if(view==="raid")loadRaid();window.scrollTo(0,0)}
+function showView(view){if(!["home","dashboard","aq","raid","champions"].includes(view))view="home";activeView=view;document.querySelectorAll(".view").forEach(el=>el.hidden=el.id!=="view-"+view);document.querySelectorAll("[data-view]").forEach(el=>el.classList.toggle("active",el.dataset.view===view));if(view==="dashboard")loadDashboard();if(view==="raid")loadRaid();if(view==="champions")loadChampions();window.scrollTo(0,0)}
 document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.go)));
 function raidStatus(t){$("raid-status").textContent=t}
@@ -150,5 +164,54 @@ async function loadDashboard(){
  }catch(err){status.textContent="Could not load dashboard: "+err.message;bgBox.textContent="Unable to load.";missingBox.textContent="Unable to load.";rosterBox.textContent="Unable to load."}
 }
 $("dash-refresh").onclick=loadDashboard;
+
+/* Champion Library: read-only. No API credentials or private service keys in the browser. */
+let championRows=[],championSelected=null,championLoaded=false;
+const champClasses=new Set(["Cosmic","Tech","Mutant","Skill","Science","Mystic"]);
+const champText=(v)=>typeof v==="string"&&v.trim()?v.trim():null;
+const champArray=(v)=>Array.isArray(v)?v.filter(x=>typeof x==="string"&&x.trim()).map(x=>x.trim()):[];
+const champSafeUrl=(v)=>{try{const u=new URL(v);return u.protocol==="https:"?u.href:null}catch{return null}};
+const champYoutube=(v)=>{const u=champSafeUrl(v);if(!u)return null;try{const h=new URL(u).hostname.toLowerCase();return h==="youtube.com"||h.endsWith(".youtube.com")||h==="youtu.be"?u:null}catch{return null}};
+function champField(label,html){return `<div class="champ-field"><h3>${esc(label)}</h3>${html}</div>`}
+function champList(v){const a=champArray(v);return a.length?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:'<p class="champ-muted">Not yet verified</p>'}
+function champAbilities(v){if(!Array.isArray(v)||!v.length)return '<p class="champ-muted">Not yet verified</p>';return '<ul>'+v.map(x=>{if(typeof x==="string")return `<li>${esc(x)}</li>`;if(x&&typeof x==="object"){const title=champText(x.name)||champText(x.title),desc=champText(x.description)||champText(x.text);return `<li>${title?`<strong>${esc(title)}</strong>${desc?": ":""}`:""}${desc?esc(desc):(!title?'Details pending':'')}</li>`}return ''}).join('')+'</ul>'}
+function renderChampionDirectory(){
+ const q=$("champ-search").value.trim().toLocaleLowerCase(),cl=$("champ-filter").value;
+ const rows=championRows.filter(x=>(!cl||x.class===cl)&&(!q||x.name.toLocaleLowerCase().includes(q)));
+ $("champ-status").textContent=`${rows.length} champion${rows.length===1?'':'s'} shown · ${championRows.length} in library`;
+ $("champ-grid").innerHTML=rows.length?rows.map(x=>`<button type="button" class="champ-card" data-champ="${esc(x.slug)}"><span><strong>${esc(x.name)}</strong><br><span class="champ-class" data-class="${esc(x.class)}">${esc(x.class)}</span></span><span class="muted">View profile →</span></button>`).join(''):'<p class="champ-muted">No champions match this search. Try another name or class.</p>';
+}
+function renderChampionProfile(slug){const c=championRows.find(x=>x.slug===slug);if(!c)return;
+ championSelected=slug;$("champ-directory").hidden=true;$("champ-profile").hidden=false;
+ const portrait=champSafeUrl(c.portrait_url),yt=champYoutube(c.youtube_url),source=champSafeUrl(c.source_url);
+ const youtubeSearch='https://www.youtube.com/results?search_query='+encodeURIComponent('MCOC '+c.name+' how to play guide');
+ const rotation=Array.isArray(c.rotations)?champAbilities(c.rotations):'<p class="champ-muted">Not yet verified</p>';
+ const verified=champText(c.last_verified_at)?new Date(c.last_verified_at):null;
+ const verifiedText=verified&&!isNaN(verified.getTime())?verified.toLocaleDateString():'Not yet verified';
+ $("champ-profile-content").innerHTML=`<div class="champ-heading">${portrait?`<img class="champ-portrait" src="${esc(portrait)}" alt="${esc(c.name)} portrait" loading="lazy" referrerpolicy="no-referrer">`:''}<div><h2>${esc(c.name)}</h2><span class="badge">${esc(c.class)}</span><p class="muted">7-star availability: ${c.available_as_7_star===true?'Yes':c.available_as_7_star===false?'No':'Not verified'}</p></div></div>
+ <p>${champText(c.description)?esc(c.description):'<span class="champ-muted">Champion overview awaiting verification.</span>'}</p>
+ <div class="champ-profile-grid">${champField('Abilities',champAbilities(c.abilities))}${champField('Immunities',champList(c.immunities))}${champField('Strengths',champList(c.strengths))}${champField('Weaknesses',champList(c.weaknesses))}${champField('Signature ability',`<p>${champText(c.signature_ability)?esc(c.signature_ability):'<span class="champ-muted">Not yet verified</span>'}</p>`)}${champField('How to play · rotations',rotation)}</div>
+ <div class="champ-field" style="margin-top:13px"><h3>▶ YouTube gameplay guide</h3>${yt?`<a class="champ-link" href="${esc(yt)}" target="_blank" rel="noopener noreferrer">Watch champion guide on YouTube ↗</a>`:`<p class="champ-muted">No curated guide linked yet.</p><a class="champ-link" href="${esc(youtubeSearch)}" target="_blank" rel="noopener noreferrer">Search YouTube for ${esc(c.name)} gameplay guides ↗</a>`}</div>
+ <p class="muted">Verified: ${esc(verifiedText)}${source?` · <a class="champ-link" href="${esc(source)}" target="_blank" rel="noopener noreferrer">Champion information source ↗</a>`:''}</p>`;
+}
+async function loadChampions(force=false){
+ if(championLoaded&&!force){if(championSelected)renderChampionProfile(championSelected);else renderChampionDirectory();return}
+ if(!db){$("champ-status").textContent="Champion database connection unavailable.";return}
+ $("champ-status").textContent="Loading champions from Supabase…";
+ try{
+  let all=[],from=0;const batch=500;
+  while(true){const r=await db.from('champions').select('slug,name,class,portrait_url,description,abilities,immunities,strengths,weaknesses,signature_ability,rotations,available_as_7_star,youtube_url,source_url,last_verified_at').order('name').range(from,from+batch-1);
+   if(r.error)throw r.error;all.push(...(r.data||[]));if(!r.data||r.data.length<batch)break;from+=batch;if(from>=5000)break;
+  }
+  championRows=all.filter(c=>champText(c.slug)&&champText(c.name)&&champClasses.has(c.class));championLoaded=true;
+  if(championSelected&&championRows.some(c=>c.slug===championSelected))renderChampionProfile(championSelected);else{championSelected=null;$("champ-profile").hidden=true;$("champ-directory").hidden=false;renderChampionDirectory()}
+ }catch(e){$("champ-status").textContent="Unable to load champion data: "+e.message;$("champ-grid").textContent=""}
+}
+$("champ-search").addEventListener('input',renderChampionDirectory);
+$("champ-filter").addEventListener('change',renderChampionDirectory);
+$("champ-refresh").onclick=()=>loadChampions(true);
+$("champ-grid").addEventListener('click',e=>{const b=e.target.closest('[data-champ]');if(b)renderChampionProfile(b.dataset.champ)});
+$("champ-back").onclick=()=>{championSelected=null;$("champ-profile").hidden=true;$("champ-directory").hidden=false;renderChampionDirectory()};
+
 showView("home");
 </script></body></html>
