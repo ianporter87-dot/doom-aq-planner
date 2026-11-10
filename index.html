@@ -38,8 +38,27 @@ button.primary,.active{background:#d91d38!important;border-color:#ff7a83!importa
 @media(max-width:650px){.raid-grid{grid-template-columns:1fr}.hub-grid{gap:9px}.hub-tile{min-height:138px;padding:12px}.metric strong{font-size:23px}}
 
 .roster-entry{display:inline-flex;align-items:stretch;gap:3px;background:#321621;border:1px solid #8b354b;border-radius:6px;padding:3px}.roster-entry .player{border:0;background:transparent}.roster-entry .delete-player{background:#4a1726;border:1px solid #b54d60;color:#ffd9df;font-weight:900;min-width:35px}.roster-entry .player:disabled{opacity:.55}.roster-entry .player.selected{outline:2px solid #ff8091}.roster-entry .player.locked{color:#dcaab4}.warning{color:#ffb7c2;font-size:12px}
+
+/* Stage 4: live command centre */
+.dash-bg-card{padding:15px;margin:12px 0;background:#24141d;border:1px solid #7e2b40;border-radius:8px}
+.dash-bg-card h3{margin:0}.dash-progress-row{display:flex;justify-content:space-between;gap:10px;margin:12px 0 5px;font-size:13px}.dash-bg-card .progress{height:9px}
+.dash-detail{margin:9px 0;border:1px solid #794052;border-radius:8px;background:#20121a;overflow:hidden}
+.dash-detail summary{cursor:pointer;padding:13px 15px;line-height:1.5}.dash-detail[open] summary{border-bottom:1px solid #794052;background:#351823}
+.dash-two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;padding:12px 15px}
+.dash-two-col h4{margin:0 0 9px}.dash-two-col ul{padding-left:19px;margin:0}.dash-two-col li{margin-bottom:7px;font-size:13px;line-height:1.5}
+.dash-player-list{display:flex;flex-wrap:wrap;gap:7px;padding:13px}.dash-done{color:#8be0a5;font-size:13px}
+.metric .progress{margin-top:10px}
+@media(max-width:600px){.dash-two-col{grid-template-columns:1fr}.dash-bg-card{padding:12px}}
 </style></head><body><header class="jugger-header"><div class="jugger-banner-wrap"><img class="jugger-banner" src="juggerbot-banner.jpg" alt="JUGGERBOT AQ PLANNER — red-armoured comic mascot smashing through rubble" loading="eager" decoding="async"></div><div class="jugger-tagline">💥 MAP 8 SMASH ZONE <span>·</span> NO ONE STOPS THE JUGGERNAUT!</div></header><nav class="site-nav" aria-label="Main navigation"><button type="button" data-view="home" class="active">🏠 Home</button><button type="button" data-view="dashboard">📊 Dashboard</button><button type="button" data-view="aq">💥 AQ Map 8</button><button type="button" data-view="raid">🛡️ RAID</button></nav><main><div class="view" id="view-home"><section class="hero-card"><div class="muted">JUGGERBOT HQ · ALLIANCE OPERATIONS</div><h2>CHOOSE YOUR BATTLE!</h2><p>Plan the lanes. Rally the squad. Smash the objectives.</p></section><div class="hub-grid"><button type="button" class="hub-tile" data-go="dashboard"><span class="tile-icon">📊</span><span><strong>DASHBOARD</strong><small>Live alliance overview</small></span></button><button type="button" class="hub-tile" data-go="aq"><span class="tile-icon">💥</span><span><strong>AQ MAP 8</strong><small>All 3 Battlegroups</small></span></button><button type="button" class="hub-tile" data-go="raid"><span class="tile-icon">🛡️</span><span><strong>RAID</strong><small>9 roles per BG · live assignments</small></span></button><div class="hub-tile soon" aria-label="Coming soon"><span class="tile-icon">🔒</span><span><strong>COMING SOON</strong><small>More ways to smash</small></span></div></div></div>
-<div class="view" id="view-dashboard" hidden><section class="card"><h2>📊 Alliance Dashboard</h2><p class="muted">Live AQ figures from Supabase. Live AQ and RAID assignment totals.</p><div class="metric-grid"><div class="metric"><strong id="dash-aq">— / 72</strong><small>AQ paths assigned</small></div><div class="metric"><strong id="dash-raid">— / 27</strong><small>RAID roles assigned</small></div><div class="metric"><strong id="dash-players">—</strong><small>Alliance roster</small></div><div class="metric"><strong>3</strong><small>Battlegroups</small></div></div><h2 style="margin-top:22px">AQ Progress by Battlegroup</h2><div id="dash-bgs" aria-live="polite">Loading assignments…</div><div class="dash-actions"><button type="button" class="primary" id="dash-refresh">Refresh dashboard</button><button type="button" data-go="aq">Open AQ planner</button></div><p id="dash-status" class="muted" role="status"></p></section></div>
+<div class="view" id="view-dashboard" hidden>
+<section class="hero-card"><div class="muted">JUGGERBOT 2.0 · LIVE ALLIANCE INTELLIGENCE</div><h2>ALLIANCE COMMAND CENTRE</h2><p>Every battlegroup. Every open slot. No excuses.</p></section>
+<section class="card"><div class="row between"><h2>📊 Alliance Overview</h2><button type="button" class="primary" id="dash-refresh">↻ Refresh</button></div>
+<div class="metric-grid"><div class="metric"><strong id="dash-aq">— / 72</strong><small>AQ paths assigned</small><div class="progress"><div id="dash-aq-bar" style="width:0%"></div></div></div><div class="metric"><strong id="dash-raid">— / 27</strong><small>RAID roles assigned</small><div class="progress"><div id="dash-raid-bar" style="width:0%"></div></div></div><div class="metric"><strong id="dash-players">—</strong><small>Alliance roster</small></div><div class="metric"><strong id="dash-unallocated">—</strong><small>Players without a BG</small></div></div>
+<p id="dash-status" class="muted" role="status" aria-live="polite">Open the dashboard to load live assignments.</p></section>
+<section class="card"><h2>🛡️ Battlegroup Readiness</h2><div id="dash-bgs" aria-live="polite">Loading assignments…</div></section>
+<section class="card"><h2>🚨 Missing Assignments</h2><p class="muted">Exact open paths and roles, grouped by battlegroup.</p><div id="dash-missing">Loading…</div></section>
+<section class="card"><h2>👥 Player Allocation</h2><p class="muted">A player can fill several slots, but only in one battlegroup across AQ and RAID.</p><div id="dash-roster">Loading…</div></section>
+<div class="dash-actions"><button type="button" class="primary" data-go="aq">Open AQ planner</button><button type="button" data-go="raid">Open RAID planner</button></div></div>
 <div class="view" id="view-raid" hidden><section class="hero-card"><div class="muted">RAID ASSIGNMENT PLANNER · LIVE</div><h2>SMASH THE RAID!</h2><p>Three branches. Three roles per branch. Nine assignments per Battlegroup.</p></section><section class="card"><h2>🛡️ RAID Battlegroup</h2><div class="tabs" id="raid-tabs"><button type="button" class="active" data-raid-bg="1">BG1</button><button type="button" data-raid-bg="2">BG2</button><button type="button" data-raid-bg="3">BG3</button></div><p class="muted">Choose a player for each role. AQ and RAID share one Battlegroup lock. Changes save immediately to the shared database.</p><div class="raid-grid" id="raid-grid"></div><div class="row" style="margin-top:16px"><button class="primary" id="raid-copy">Copy RAID Battle Orders</button><button id="raid-refresh">Refresh RAID</button></div><p id="raid-status" class="muted" role="status" aria-live="polite"></p><textarea id="raid-fallback" hidden></textarea></section></div>
 <div class="view" id="view-aq" hidden>
 <section class="card"><div class="row between"><h2>💥 Pick Your Battlegroup</h2><span class="badge" id="bglabel">BG1</span></div><div class="tabs" id="bgtabs"><button class="active" data-bg="1">BG1</button><button data-bg="2">BG2</button><button data-bg="3">BG3</button></div><p class="muted">Players can be assigned to only one Battlegroup across AQ and RAID. Remove their existing assignments before moving them.</p></section>
@@ -91,7 +110,45 @@ $("raid-grid").addEventListener("change",e=>{const s=e.target.closest("[data-rai
 document.querySelectorAll("[data-raid-bg]").forEach(b=>b.addEventListener("click",()=>{raidBg=+b.dataset.raidBg;drawRaid()}));
 $("raid-refresh").onclick=loadRaid;
 $("raid-copy").onclick=async()=>{const lines=["💥 JUGGERBOT RAID – BG"+raidBg+" ASSIGNMENTS 💥",""];for(const branch of ["left","middle","right"]){lines.push(branch.toUpperCase()+" BRANCH");for(const role of ["assault","tank","tactician"]){const a=raidRows.find(x=>+x.battlegroup===raidBg&&x.branch===branch&&x.role===role);lines.push(role[0].toUpperCase()+role.slice(1)+" – "+(players.find(p=>p.id===a?.player_id)?.name||"OPEN"))}lines.push("")}const t=lines.join("\n");try{await navigator.clipboard.writeText(t);raidStatus("RAID orders copied!")}catch(e){$("raid-fallback").hidden=false;$("raid-fallback").value=t;$("raid-fallback").focus();$("raid-fallback").select();raidStatus("Report selected; copy manually.")}};
-async function loadDashboard(){const box=$("dash-bgs"),status=$("dash-status");if(!db){status.textContent="Dashboard unavailable: Supabase connection not ready.";return}status.textContent="Refreshing live AQ totals…";try{const [p,a,r]=await Promise.all([db.from("players").select("id"),db.from("assignments").select("battlegroup,section,path_index"),db.from("raid_assignments").select("battlegroup")]);if(p.error||a.error||r.error)throw(p.error||a.error||r.error);$("dash-players").textContent=p.data.length;$("dash-aq").textContent=a.data.length+" / 72";$("dash-raid").textContent=r.data.length+" / 27";box.innerHTML=[1,2,3].map(n=>{const count=a.data.filter(x=>+x.battlegroup===n).length;return `<div class="bg-progress"><div class="row between"><b>BG${n}</b><b>${count} / 24</b></div><div class="progress"><div style="width:${Math.min(100,count/24*100)}%"></div></div></div>`}).join("");status.textContent="Live AQ and RAID data loaded."}catch(err){status.textContent="Could not load dashboard: "+err.message}}
+async function loadDashboard(){
+ const status=$("dash-status"),bgBox=$("dash-bgs"),missingBox=$("dash-missing"),rosterBox=$("dash-roster");
+ if(!db){status.textContent="Dashboard unavailable: Supabase connection not ready.";return}
+ status.textContent="Refreshing live alliance data…";
+ try{
+  const [p,a,r]=await Promise.all([
+   db.from("players").select("id,name").order("name"),
+   db.from("assignments").select("player_id,battlegroup,section,path_index"),
+   db.from("raid_assignments").select("player_id,battlegroup,branch,role")
+  ]);
+  if(p.error||a.error||r.error)throw(p.error||a.error||r.error);
+  const ps=p.data||[],aq=a.data||[],ra=r.data||[],roles=["assault","tank","tactician"],branches=["left","middle","right"];
+  const pct=(n,total)=>Math.max(0,Math.min(100,Math.round(n/total*100)));
+  const aqKey=(x)=>`${+x.battlegroup}:${+x.section}:${+x.path_index}`;
+  const raidKey=(x)=>`${+x.battlegroup}:${x.branch}:${x.role}`;
+  const aqKeys=new Set(aq.map(aqKey)),raidKeys=new Set(ra.map(raidKey));
+  const playerGroups=new Map();
+  for(const x of [...aq,...ra]){if(!playerGroups.has(x.player_id))playerGroups.set(x.player_id,new Set());playerGroups.get(x.player_id).add(+x.battlegroup)}
+  const unallocated=ps.filter(x=>!playerGroups.has(x.id));
+  $("dash-aq").textContent=aqKeys.size+" / 72";$("dash-raid").textContent=raidKeys.size+" / 27";
+  $("dash-players").textContent=ps.length;$("dash-unallocated").textContent=unallocated.length;
+  $("dash-aq-bar").style.width=pct(aqKeys.size,72)+"%";$("dash-raid-bar").style.width=pct(raidKeys.size,27)+"%";
+  const bgs=[1,2,3].map(bg=>{
+   const missingAQ=[],missingRaid=[];
+   MAP.forEach((section,si)=>section.forEach((path,pi)=>{
+    if(!aqKeys.has(`${bg}:${si}:${pi}`))missingAQ.push(`S${si+1} · Path ${pi+1} — ${path[0]}`);
+   }));
+   for(const branch of branches)for(const role of roles){if(!raidKeys.has(`${bg}:${branch}:${role}`))missingRaid.push(`${branch[0].toUpperCase()+branch.slice(1)} — ${role[0].toUpperCase()+role.slice(1)}`)}
+   const countAQ=24-missingAQ.length,countRaid=9-missingRaid.length;
+   const assigned=ps.filter(x=>playerGroups.get(x.id)?.has(bg));
+   return {bg,missingAQ,missingRaid,countAQ,countRaid,assigned};
+  });
+  bgBox.innerHTML=bgs.map(x=>`<div class="dash-bg-card"><div class="row between"><h3>BG${x.bg}</h3><span class="badge">${x.assigned.length} players</span></div><div class="dash-progress-row"><span>AQ Map 8</span><b>${x.countAQ}/24 · ${pct(x.countAQ,24)}%</b></div><div class="progress"><div style="width:${pct(x.countAQ,24)}%"></div></div><div class="dash-progress-row"><span>RAID</span><b>${x.countRaid}/9 · ${pct(x.countRaid,9)}%</b></div><div class="progress"><div style="width:${pct(x.countRaid,9)}%"></div></div></div>`).join("");
+  missingBox.innerHTML=bgs.map(x=>`<details class="dash-detail" ${x.missingAQ.length||x.missingRaid.length?'':'open'}><summary><strong>BG${x.bg}</strong> · ${x.missingAQ.length} AQ open · ${x.missingRaid.length} RAID open</summary><div class="dash-two-col"><div><h4>AQ open paths</h4>${x.missingAQ.length?`<ul>${x.missingAQ.map(v=>`<li>${esc(v)}</li>`).join("")}</ul>`:'<p class="dash-done">All AQ paths filled!</p>'}</div><div><h4>RAID open roles</h4>${x.missingRaid.length?`<ul>${x.missingRaid.map(v=>`<li>${esc(v)}</li>`).join("")}</ul>`:'<p class="dash-done">All RAID roles filled!</p>'}</div></div></details>`).join("");
+  rosterBox.innerHTML=bgs.map(x=>`<details class="dash-detail"><summary><strong>BG${x.bg}</strong> · ${x.assigned.length} players</summary><div class="dash-player-list">${x.assigned.length?x.assigned.map(p=>`<span class="badge">${esc(p.name)}</span>`).join(""):'<span class="muted">No players assigned</span>'}</div></details>`).join("")+`<details class="dash-detail"><summary><strong>Unallocated</strong> · ${unallocated.length} players</summary><div class="dash-player-list">${unallocated.length?unallocated.map(p=>`<span class="badge">${esc(p.name)}</span>`).join(""):'<span class="dash-done">Everyone is assigned to a BG.</span>'}</div></details>`;
+  const conflicts=[...playerGroups.values()].filter(g=>g.size>1).length;
+  status.textContent=`Updated from Supabase · ${aqKeys.size+raidKeys.size} of 99 slots filled`+(conflicts?` · WARNING: ${conflicts} cross-BG conflict(s) detected`:"");
+ }catch(err){status.textContent="Could not load dashboard: "+err.message;bgBox.textContent="Unable to load.";missingBox.textContent="Unable to load.";rosterBox.textContent="Unable to load."}
+}
 $("dash-refresh").onclick=loadDashboard;
 showView("home");
 </script></body></html>
